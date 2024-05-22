@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "part-12"
+version = "0.1.0"
+description = ""
+authors = ["Michele Lombardi <michele.lombardi2@unibo.it>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+notebook = "6.5.6"
+numpy = "^1.26.4"
+scipy = "^1.13.0"
+matplotlib = "^3.9.0"
+rise = "^5.7.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
