@@ -30,7 +30,7 @@ def dstate(X, t):
     # Restituisco il risultato
     return np.array([dTa, dTw])
 
-    
+
 def simulate():
     X0 = [19.5, 19.5]
     t = np.linspace(0, 3600 * 2, 3600 * 2)

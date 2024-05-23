@@ -3,14 +3,7 @@ from scipy.integrate import odeint
 from scipy.optimize import brentq
 
 
-def dstate(X, t):
-    # Parametri fissi
-    G = 6.67408e-11 # Costante di gravitazione universale
-    ME = 5.972e24 # Massa della Terra
-    MM = 7.34767309e22 # Massa della Luna
-    MS = 800 # Massa del "satellite"
-    D = 384400e3 # Distanza Terra-Luna
-
+def dstate(X, t, G=6.67408e-11, ME=5.972e24, MM=7.34767309e22, MS=800, D=384400e3):
     # "spacchetto" lo stato
     x, v = X
 
@@ -25,37 +18,25 @@ def dstate(X, t):
     # Restituisco il risultato
     return np.array([dx, dv])
 
-    
-def simulate(v0):
-    rE = 6371e3 # Raggio della Terra
+
+def simulate(v0, rE=6371e3, t=np.linspace(0, 3*3600, 3*3600*100)):
     x0 = [rE, v0]
-    t = np.linspace(0, 3 * 3600, 3 * 3600 * 100)
-    
     X = odeint(dstate, x0, t)
     return X, t
 
 
-
-def find_balance_point_aux(x):
-    # Parametri fissi
-    G = 6.67408e-11 # Costante di gravitazione universale
-    ME = 5.972e24 # Massa della Terra
-    MM = 7.34767309e22 # Massa della Luna
-    MS = 800 # Massa del "satellite"
-    D = 384400e3 # Distanza Terra-Luna
-    
+def find_balance_point_aux(x, G=6.67408e-11, ME=5.972e24, MM=7.34767309e22, MS=800, D=384400e3):
     # Calcolo le forze
     rse = x
     Fse = -G * MS * ME / (rse * abs(rse))
     rsm = x - D
     Fsm = -G * MS * MM / (rsm * abs(rsm))
-    
+
     # Restituisco il risultato
     return Fse + Fsm
 
 
-def find_balance_point():
-    a, b = 1e6, 384e6
+def find_balance_point(a=1e6, b=384e6):
     x_sol = brentq(find_balance_point_aux, a=a, b=b)
     return x_sol
 

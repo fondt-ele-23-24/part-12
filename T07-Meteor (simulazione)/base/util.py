@@ -1,6 +1,5 @@
 from mpl_toolkits.axisartist.parasite_axes import HostAxes, ParasiteAxes
 from matplotlib import pyplot as plt
-from matplotlib import cm
 
 def plot(x, y, xlabel=None, ylabel=None, title=None, figsize=None):
     plt.figure(figsize=figsize)
@@ -11,7 +10,7 @@ def plot(x, y, xlabel=None, ylabel=None, title=None, figsize=None):
     plt.grid(':')
     plt.show()
 
-    
+
 def plot_univariate_function(f, x, figsize=None):
     plt.figure(figsize=figsize)
     plt.plot(x, f(x))
@@ -26,7 +25,7 @@ def plot_state_evolution(X, t, ylabels=None, xlabel=None, title=None, figsize=No
     fig = plt.figure(figsize=figsize)
 
     # Preparo la mappa dei colori
-    cmap = cm.get_cmap('Set2')
+    cmap = plt.get_cmap('Set2')
 
     # Define font size
     fontsize = None if figsize is None else 0.9 * figsize[0]
